@@ -5,25 +5,29 @@ import Signup from './screens/SignUpScreen.jsx'
 import Login from './screens/LoginSreen.jsx'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
+import { useMemo } from 'react'
+import { themeSettings } from './theme.js'
+import { Navbar } from './components/Navbar.jsx'
+import { Box } from '@mui/material'
+import { Dashboard } from './screens/Dashboard/Dashboard.jsx'
 
 function App() {
+  const theme = useMemo(() => createTheme(themeSettings), [])
   return (
-    <>
-      <ThemeProvider theme={darkTheme}>
+    <div className='app'>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/home' element={<HomeScreen />} />
-        </Routes>
+        <Box width='100%' height='100%' p='1rem 2rem 4rem 2rem'>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/home' element={<HomeScreen />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+          </Routes>
+        </Box>
       </ThemeProvider>
-    </>
+    </div>
   )
 }
 
