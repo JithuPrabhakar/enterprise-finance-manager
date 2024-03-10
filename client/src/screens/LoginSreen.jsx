@@ -17,65 +17,34 @@ import {
   Grid,
   Typography,
   useTheme,
+  Container,
 } from '@mui/material'
 
 function Login() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
   const { palette } = useTheme()
 
-  const { userInfo } = useSelector((state) => state.auth)
-
-  const [login, { isLoading, error }] = useLoginMutation()
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/home')
-    }
-  }, [userInfo, navigate])
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const user = {
-      email: data.get('email'),
-      password: data.get('password'),
-    }
-
-    const { email, password } = user
-
-    try {
-      const res = await login({ email, password }).unwrap()
-      dispatch(setCredentials({ ...res }))
-      navigate('/home')
-    } catch (error) {
-      toast.error(error?.data?.message || error.error)
-    }
-  }
-
   return (
-    <Grid container component='main' height='100%'>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+    <Box
+      height='100%'
+      display={'flex'}
+      alignItems={'center'}
+      color={palette.grey[200]}
+    >
+      <Container component='main' maxWidth='xs'>
         <Box
           sx={{
-            my: 8,
-            mx: 4,
+            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
+          <Typography variant='h2' fontWeight='600'>
             Sign in
           </Typography>
-          <Box
-            component='form'
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
-          >
+          <Box noValidate sx={{ mt: 1 }}>
             <TextField
+              color='success'
               margin='normal'
               required
               fullWidth
@@ -95,48 +64,30 @@ function Login() {
               id='password'
               autoComplete='current-password'
             />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
             <Button
               type='submit'
               fullWidth
               variant='contained'
-              size='small'
-              color='success'
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2' color={'textPrimary'}>
+                <Link href='#' variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2' color={'textPrimary'}>
+                <Link href='#' variant='body2'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </Grid>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${finance})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-    </Grid>
+      </Container>
+    </Box>
   )
 }
 export default Login

@@ -20,9 +20,9 @@ function App() {
         <Box width='100%' height='100%' p='1rem 2rem 4rem 2rem'>
           <Navbar />
           <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/home' element={<HomeScreen />} />
             <Route path='/dashboard' element={<Dashboard />} />
           </Routes>
         </Box>
