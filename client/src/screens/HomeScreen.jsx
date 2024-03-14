@@ -1,4 +1,5 @@
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 function HomeScreen() {
   const { palette } = useTheme()
@@ -51,7 +52,7 @@ function HomeScreen() {
                   '&:hover': { color: palette.primary[300] },
                 }}
               >
-                Learn More
+                <Link to='/features'>Learn More</Link>
               </Button>
             </Box>
           </Box>

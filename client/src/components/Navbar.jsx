@@ -24,7 +24,7 @@ export const Navbar = () => {
           sx={{ fontSize: '1.8rem', color: palette.primary.light }}
         />
         <Typography variant='h4' fontSize='1.2rem'>
-          En-Fi
+          Edu-Fin
         </Typography>
       </FlexBetween>
       <FlexBetween gap='1rem'>
