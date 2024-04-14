@@ -1,13 +1,20 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
+import { kpis, products, transactions } from '../data/data.js'
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
-    console.log(`MongoDb Connected : ${conn.connection.host}`);
-  } catch (error) {
-    console.log(`Error: ${error.message}`);
-    process.exit(1);
-  }
-};
+const PORT = process.env.PORT || 9000
+const connectDB = () => {
+  const conn = mongoose
+    .connect(process.env.MONGO_URL)
+    .then(async () => {
+      app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
 
-export default connectDB;
+      /* ADD DATA ONE TIME ONLY OR AS NEEDED */
+      await mongoose.connection.db.dropDatabase()
+      KPI.insertMany(kpis)
+      // Product.insertMany(products);
+      // Transaction.insertMany(transactions);
+    })
+    .catch((error) => console.log(`${error} did not connect`))
+}
+
+export default connectDB

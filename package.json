@@ -1,13 +1,13 @@
 {
-  "name": "budget-management-tool",
+  "name": "enterprise-finance-manager",
   "version": "1.0.0",
   "type": "module",
-  "description": "budget management tool",
+  "description": "enterprise finance manager",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
-    "client": "npm run dev --prefix frontend",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "suhail",
