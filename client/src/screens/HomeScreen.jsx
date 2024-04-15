@@ -43,7 +43,7 @@ function HomeScreen() {
                   '&:hover': { background: palette.primary[300] },
                 }}
               >
-                Get Started
+                <Link to='/get-started'>Get Started</Link>
               </Button>
               <Button
                 variant='outlined'

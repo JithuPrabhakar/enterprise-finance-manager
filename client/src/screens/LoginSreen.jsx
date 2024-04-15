@@ -1,36 +1,37 @@
-import { toast } from 'react-toastify'
-import Loader from '../components/Loader'
-import { useEffect } from 'react'
-import { setCredentials } from '../slices/authSlice'
-import finance from '../assets/images/finance.jpg'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../slices/userApiSlice'
-import {
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Paper,
-  Box,
-  Grid,
-  Typography,
-  useTheme,
-  Container,
-} from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import { Box, useTheme } from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-function Login() {
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
+export default function SignIn() {
   const { palette } = useTheme()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    })
+  }
 
   return (
-    <Box
-      height='100%'
-      display={'flex'}
-      alignItems={'center'}
-      color={palette.grey[200]}
-    >
+    <ThemeProvider theme={darkTheme}>
       <Container component='main' maxWidth='xs'>
+        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -39,12 +40,19 @@ function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography variant='h2' fontWeight='600'>
+          <Avatar sx={{ m: 1, bgcolor: palette.primary.light }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
-          <Box noValidate sx={{ mt: 1 }}>
+          <Box
+            component='form'
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
-              color='success'
               margin='normal'
               required
               fullWidth
@@ -53,6 +61,23 @@ function Login() {
               name='email'
               autoComplete='email'
               autoFocus
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                },
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                },
+              }}
             />
             <TextField
               margin='normal'
@@ -63,23 +88,49 @@ function Login() {
               type='password'
               id='password'
               autoComplete='current-password'
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                },
+              }}
             />
             <Button
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                background: palette.primary.light,
+                '&:hover': { background: palette.primary[300] },
+                mt: 3,
+                mb: 2,
+              }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
+                <Link href='#' variant='body2' color={palette.primary.light}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2'>
+                <Link
+                  href='/signup'
+                  variant='body2'
+                  color={palette.primary.light}
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -87,7 +138,6 @@ function Login() {
           </Box>
         </Box>
       </Container>
-    </Box>
+    </ThemeProvider>
   )
 }
-export default Login

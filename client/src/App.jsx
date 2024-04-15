@@ -11,6 +11,7 @@ import { Navbar } from './components/Navbar.jsx'
 import { Box } from '@mui/material'
 import { Dashboard } from './screens/Dashboard/Dashboard.jsx'
 import Features from './screens/Features.jsx'
+import GetStarted from './screens/GetStarted.jsx'
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), [])
@@ -26,6 +27,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/features' element={<Features />} />
+            <Route path='/get-started' element={<GetStarted />} />
           </Routes>
         </Box>
       </ThemeProvider>
