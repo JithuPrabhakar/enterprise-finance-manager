@@ -1,53 +1,67 @@
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
-import { useTheme, Box, Grid, Link } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useTheme, Box, Grid, Link } from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useRegisterMutation } from "../slices/userApiSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../slices/authSlice";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
   },
-})
+});
 
 export default function SignUp() {
-  const { palette } = useTheme()
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    })
-  }
+  const { palette } = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const user = {
+      email: data.get("email"),
+      password: data.get("password"),
+      name: data.get("firstName"),
+    };
+
+    const res = await register(user).unwrap();
+    dispatch(setCredentials({ ...res }));
+    navigate("/");
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: palette.primary.light }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5'>
+          <Typography component="h1" variant="h5">
             Sign up
           </Typography>
           <Box
-            component='form'
+            component="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
@@ -57,27 +71,27 @@ export default function SignUp() {
                 <TextField
                   InputLabelProps={{
                     sx: {
-                      '&.Mui-focused': {
+                      "&.Mui-focused": {
                         color: palette.primary.light,
                       },
                     },
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": {
                         borderColor: palette.primary.light,
                       },
-                      '&.Mui-focused fieldset': {
+                      "&.Mui-focused fieldset": {
                         borderColor: palette.primary.light,
                       },
                     },
                   }}
-                  autoComplete='given-name'
-                  name='firstName'
+                  autoComplete="given-name"
+                  name="firstName"
                   required
                   fullWidth
-                  id='firstName'
-                  label='First Name'
+                  id="firstName"
+                  label="First Name"
                   autoFocus
                 />
               </Grid>
@@ -85,103 +99,103 @@ export default function SignUp() {
                 <TextField
                   InputLabelProps={{
                     sx: {
-                      '&.Mui-focused': {
+                      "&.Mui-focused": {
                         color: palette.primary.light,
                       },
                     },
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": {
                         borderColor: palette.primary.light,
                       },
-                      '&.Mui-focused fieldset': {
+                      "&.Mui-focused fieldset": {
                         borderColor: palette.primary.light,
                       },
                     },
                   }}
                   required
                   fullWidth
-                  id='lastName'
-                  label='Last Name'
-                  name='lastName'
-                  autoComplete='family-name'
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   InputLabelProps={{
                     sx: {
-                      '&.Mui-focused': {
+                      "&.Mui-focused": {
                         color: palette.primary.light,
                       },
                     },
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": {
                         borderColor: palette.primary.light,
                       },
-                      '&.Mui-focused fieldset': {
+                      "&.Mui-focused fieldset": {
                         borderColor: palette.primary.light,
                       },
                     },
                   }}
                   required
                   fullWidth
-                  id='email'
-                  label='Email Address'
-                  name='email'
-                  autoComplete='email'
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   InputLabelProps={{
                     sx: {
-                      '&.Mui-focused': {
+                      "&.Mui-focused": {
                         color: palette.primary.light,
                       },
                     },
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&:hover fieldset': {
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": {
                         borderColor: palette.primary.light,
                       },
-                      '&.Mui-focused fieldset': {
+                      "&.Mui-focused fieldset": {
                         borderColor: palette.primary.light,
                       },
                     },
                   }}
                   required
                   fullWidth
-                  name='password'
-                  label='Password'
-                  type='password'
-                  id='password'
-                  autoComplete='new-password'
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
                 />
               </Grid>
             </Grid>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='contained'
+              variant="contained"
               sx={{
                 background: palette.primary.light,
-                '&:hover': { background: palette.primary[300] },
+                "&:hover": { background: palette.primary[300] },
                 mt: 3,
                 mb: 2,
               }}
             >
               Sign Up
             </Button>
-            <Grid container justifyContent='flex-end'>
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
-                  href='/login'
-                  variant='body2'
+                  href="/login"
+                  variant="body2"
                   color={palette.primary.light}
                 >
                   Already have an account? Sign in
@@ -192,5 +206,5 @@ export default function SignUp() {
         </Box>
       </Container>
     </ThemeProvider>
-  )
+  );
 }

@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       gender: user.gender,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: user.isAdmin,
     });
   } else {
     res.status(400);
@@ -53,7 +53,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: user.isAdmin,
     });
   } else {
     res.status(401);
