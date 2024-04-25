@@ -6,11 +6,11 @@ const connectDB = () => {
   const conn = mongoose
     .connect(process.env.MONGO_URL)
     .then(async () => {
-      app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
-
+      // app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
+      console.log('MongoDB Connected...')
       /* ADD DATA ONE TIME ONLY OR AS NEEDED */
       await mongoose.connection.db.dropDatabase()
-      KPI.insertMany(kpis)
+      // KPI.insertMany(kpis)
       // Product.insertMany(products);
       // Transaction.insertMany(transactions);
     })
