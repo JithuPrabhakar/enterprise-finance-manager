@@ -1,14 +1,12 @@
-import { useTheme, Typography, Box } from '@mui/material'
+import { Button } from '@mui/material'
+import TransactionForm from './Accountant/TransactionForm'
 
 const Accountant = () => {
-  const { palette } = useTheme()
-
   return (
-    <Box sx={{ mt: 4, textAlign: 'center' }}>
-      <Typography variant='h1' sx={{ color: palette.primary.light }}>
-        Welcome to Accounts
-      </Typography>
-    </Box>
+    <div>
+      <Button>Add Expenses</Button>
+      <TransactionForm />
+    </div>
   )
 }
 
