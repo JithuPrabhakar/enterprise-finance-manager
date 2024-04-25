@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography, useTheme } from '@mui/material'
 
 const FeatureBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.light,
@@ -45,14 +45,30 @@ const featureData = [
 ]
 
 const Features = () => {
+  const { palette } = useTheme()
+
   return (
     <>
-      <Grid container width='80%' marginInline='auto' spacing={3}>
+      <Grid
+        container
+        width='80%'
+        marginInline='auto'
+        spacing={3}
+        sx={{ mt: 4 }}
+      >
         {featureData.map((features) => (
           <Grid key={features.title} item xs={12} md={4}>
             <FeatureBox>
-              <Typography variant='h3'>{features.title}</Typography>
-              <Typography variant='h5'>{features.description}</Typography>
+              <Typography variant='h3' color={palette.primary.main}>
+                {features.title}
+              </Typography>
+              <Typography
+                variant='body1'
+                color={palette.grey[300]}
+                sx={{ mt: 1 }}
+              >
+                {features.description}
+              </Typography>
             </FeatureBox>
           </Grid>
         ))}
