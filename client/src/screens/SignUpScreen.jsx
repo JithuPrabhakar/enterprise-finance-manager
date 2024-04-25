@@ -207,6 +207,7 @@ export default function SignUp() {
               variant='contained'
               sx={{
                 background: palette.primary.light,
+                color: 'black',
                 '&:hover': { background: palette.primary[300] },
                 mt: 3,
               }}
