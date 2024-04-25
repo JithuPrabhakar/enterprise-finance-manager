@@ -1,5 +1,18 @@
 import { useTheme, Box, Grid, TextField, Button } from '@mui/material'
 import { useDispatch } from 'react-redux'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      light: '#64b5f6',
+      main: '#2196f3',
+      dark: '#1976d2',
+      contrastText: '#fff',
+    },
+  },
+})
 
 const StudentForm = () => {
   const { palette } = useTheme()
@@ -26,212 +39,215 @@ const StudentForm = () => {
   }
 
   return (
-    <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
+    <ThemeProvider theme={darkTheme}>
+      <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
+              }}
+              InputProps={{ sx: { color: 'white' } }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            InputProps={{ sx: { color: 'white' } }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              autoComplete='name'
+              name='name'
+              required
+              fullWidth
+              id='name'
+              label='Name'
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              InputProps={{ sx: { color: 'white' } }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            autoComplete='name'
-            name='name'
-            required
-            fullWidth
-            id='name'
-            label='Name'
-            autoFocus
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            InputProps={{ sx: { color: 'white' } }}
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
+              }}
+              required
+              fullWidth
+              id='regNo'
+              label='Register Number (Reg No)'
+              name='regNo'
+              autoComplete='off'
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              InputProps={{ sx: { color: 'white' } }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              required
+              fullWidth
+              id='graduation'
+              label='Graduation'
+              name='graduation'
+              autoComplete='off'
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              InputProps={{ sx: { color: 'white' } }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            required
-            fullWidth
-            id='regNo'
-            label='Register Number (Reg No)'
-            name='regNo'
-            autoComplete='off'
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            InputProps={{ sx: { color: 'white' } }}
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
-                },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
-                },
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
-                },
-              },
-            }}
-            required
-            fullWidth
-            id='graduation'
-            label='Graduation'
-            name='graduation'
-            autoComplete='off'
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            InputProps={{ sx: { color: 'white' } }}
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
-                },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
-                },
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
-                },
-              },
-            }}
-            required
-            fullWidth
-            name='semester'
-            label='Semester'
-            type='text'
-            id='semester'
-            autoComplete='off'
-          />
-        </Grid>
+              }}
+              required
+              fullWidth
+              name='semester'
+              label='Semester'
+              type='text'
+              id='semester'
+              autoComplete='off'
+            />
+          </Grid>
 
-        <Grid item xs={12}>
-          <TextField
-            InputProps={{ sx: { color: 'white' } }}
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
+          <Grid item xs={12}>
+            <TextField
+              InputProps={{ sx: { color: 'white' } }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              required
+              fullWidth
+              id='fees'
+              label='Fees'
+              name='fees'
+              autoComplete='off'
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              InputProps={{ sx: { color: 'white' } }}
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': {
+                    color: palette.primary.light,
+                  },
+                  '&.MuiInputLabel-root': {
+                    color: palette.grey[300],
+                  },
                 },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: palette.primary.light,
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: palette.primary.light,
+                  },
                 },
-              },
-            }}
-            required
-            fullWidth
-            id='fees'
-            label='Fees'
-            name='fees'
-            autoComplete='off'
-          />
+              }}
+              required
+              fullWidth
+              id='date'
+              // label='Date'
+              name='date'
+              type='date'
+              autoComplete='off'
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            InputProps={{ sx: { color: 'white' } }}
-            InputLabelProps={{
-              sx: {
-                '&.Mui-focused': {
-                  color: palette.primary.light,
-                },
-                '&.MuiInputLabel-root': {
-                  color: palette.grey[300],
-                },
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: palette.primary.light,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: palette.primary.light,
-                },
-              },
-            }}
-            required
-            fullWidth
-            id='date'
-            // label='Date'
-            name='date'
-            type='date'
-            autoComplete='off'
-          />
-        </Grid>
-      </Grid>
-      <Button
-        type='submit'
-        fullWidth
-        variant='contained'
-        sx={{
-          background: palette.primary.light,
-          '&:hover': { background: palette.primary[300] },
-          mt: 3,
-        }}
-      >
-        Submit
-      </Button>
-    </Box>
+        <Button
+          type='submit'
+          fullWidth
+          variant='contained'
+          sx={{
+            background: palette.primary.light,
+            color: 'black',
+            '&:hover': { background: palette.primary[300] },
+            mt: 3,
+          }}
+        >
+          Submit
+        </Button>
+      </Box>
+    </ThemeProvider>
   )
 }
 
