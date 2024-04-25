@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Box, useTheme, Typography, Button } from '@mui/material'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import SavingsIcon from '@mui/icons-material/Savings'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
+import { useState } from 'react'
 
 const FlexBetween = styled(Box)({
   display: 'flex',
@@ -12,10 +13,10 @@ const FlexBetween = styled(Box)({
   alignItems: 'center',
 })
 
-export const Navbar = () => {
+const Navbar = () => {
   const { palette } = useTheme()
   const [selected, setSelected] = useState('home')
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const isLoggedIn = useSelector((state) => state.auth.userInfo !== null)
 
   return (
     <FlexBetween mb='0.25rem' p='0.5rem 0' color={palette.grey[300]}>
@@ -40,42 +41,49 @@ export const Navbar = () => {
             home
           </Link>
         </Box>
-        <Box sx={{ '&:hover': { color: palette.primary.main } }}>
-          <Link
-            to='/dashboard'
-            onClick={() => setSelected('dashboard')}
-            style={{
-              color: selected === 'dashboard' ? 'inherit' : palette.grey[700],
-              textDecoration: 'inherit',
-            }}
-          >
-            dashboard
-          </Link>
-        </Box>
-        <Box sx={{ '&:hover': { color: palette.primary.main } }}>
-          <Link
-            to='/department'
-            onClick={() => setSelected('department')}
-            style={{
-              color: selected === 'department' ? 'inherit' : palette.grey[700],
-              textDecoration: 'inherit',
-            }}
-          >
-            department
-          </Link>
-        </Box>
-        <Box sx={{ '&:hover': { color: palette.primary.main } }}>
-          <Link
-            to='/accountant'
-            onClick={() => setSelected('accountant')}
-            style={{
-              color: selected === 'accountant' ? 'inherit' : palette.grey[700],
-              textDecoration: 'inherit',
-            }}
-          >
-            accountant
-          </Link>
-        </Box>
+        {isLoggedIn && (
+          <>
+            <Box sx={{ '&:hover': { color: palette.primary.main } }}>
+              <Link
+                to='/dashboard'
+                onClick={() => setSelected('dashboard')}
+                style={{
+                  color:
+                    selected === 'dashboard' ? 'inherit' : palette.grey[700],
+                  textDecoration: 'inherit',
+                }}
+              >
+                dashboard
+              </Link>
+            </Box>
+            <Box sx={{ '&:hover': { color: palette.primary.main } }}>
+              <Link
+                to='/department'
+                onClick={() => setSelected('department')}
+                style={{
+                  color:
+                    selected === 'department' ? 'inherit' : palette.grey[700],
+                  textDecoration: 'inherit',
+                }}
+              >
+                department
+              </Link>
+            </Box>
+            <Box sx={{ '&:hover': { color: palette.primary.main } }}>
+              <Link
+                to='/accountant'
+                onClick={() => setSelected('accountant')}
+                style={{
+                  color:
+                    selected === 'accountant' ? 'inherit' : palette.grey[700],
+                  textDecoration: 'inherit',
+                }}
+              >
+                accountant
+              </Link>
+            </Box>
+          </>
+        )}
       </FlexBetween>
       <FlexBetween gap='1rem'>
         <Link to='/login'>
@@ -106,3 +114,5 @@ export const Navbar = () => {
     </FlexBetween>
   )
 }
+
+export default Navbar

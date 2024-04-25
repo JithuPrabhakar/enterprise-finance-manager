@@ -7,7 +7,7 @@ import { RowOne } from './RowOne'
 import RowTwo from './RowTwo'
 import { RowThree } from './RowThree'
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const isAboveMediumScreens = useMediaQuery('(min-width: 1200px')
 
   return (
@@ -36,3 +36,5 @@ export const Dashboard = () => {
     </Box>
   )
 }
+
+export default Dashboard
