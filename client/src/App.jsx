@@ -12,6 +12,8 @@ import { Box } from '@mui/material'
 import { Dashboard } from './screens/Dashboard/Dashboard.jsx'
 import Features from './screens/Features.jsx'
 import GetStarted from './screens/GetStarted.jsx'
+import Accountant from './screens/Accountant.jsx'
+import DeptHeadPage from './screens/DeptHeadPage.jsx'
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), [])
@@ -26,6 +28,8 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/accountant' element={<Accountant />} />
+            <Route path='/department' element={<DeptHeadPage />} />
             <Route path='/features' element={<Features />} />
             <Route path='/get-started' element={<GetStarted />} />
           </Routes>
