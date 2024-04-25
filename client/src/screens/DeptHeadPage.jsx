@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTheme, Typography, Box } from '@mui/material'
+import StudentForm from './Department/StudentForm'
 
 const DeptHeadPage = () => {
   const [departmentName, setDepartmentName] = useState('')
@@ -13,6 +14,7 @@ const DeptHeadPage = () => {
       <Typography variant='h3' sx={{ color: palette.primary.light, mt: 2 }}>
         Student Fees Details
       </Typography>
+      <StudentForm />
     </Box>
   )
 }

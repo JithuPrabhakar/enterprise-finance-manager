@@ -52,6 +52,30 @@ export const Navbar = () => {
             dashboard
           </Link>
         </Box>
+        <Box sx={{ '&:hover': { color: palette.primary.main } }}>
+          <Link
+            to='/department'
+            onClick={() => setSelected('department')}
+            style={{
+              color: selected === 'department' ? 'inherit' : palette.grey[700],
+              textDecoration: 'inherit',
+            }}
+          >
+            department
+          </Link>
+        </Box>
+        <Box sx={{ '&:hover': { color: palette.primary.main } }}>
+          <Link
+            to='/accountant'
+            onClick={() => setSelected('accountant')}
+            style={{
+              color: selected === 'accountant' ? 'inherit' : palette.grey[700],
+              textDecoration: 'inherit',
+            }}
+          >
+            accountant
+          </Link>
+        </Box>
       </FlexBetween>
       <FlexBetween gap='1rem'>
         <Link to='/login'>
