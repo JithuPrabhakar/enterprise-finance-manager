@@ -4,7 +4,7 @@ import StudentForm from './Department/StudentForm'
 import MsgAdmin from './Department/MsgAdmin'
 
 const DeptHeadPage = () => {
-  const [departmentName, setDepartmentName] = useState('')
+  const [departmentName, setDepartmentName] = useState('Computer')
   const [showStudentForm, setShowStudentForm] = useState(false)
   const [showMsgAdminForm, setShowMsgAdminForm] = useState(false)
   const { palette } = useTheme()

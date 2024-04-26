@@ -2,53 +2,30 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const daySchema = new Schema(
+const transactionSchema = new Schema(
   {
     date: String,
-    revenue: Number,
-    expenses: Number,
-    income: Number, // Add income field
-  },
-  { toJSON: { getters: true } }
-)
-
-const monthSchema = new Schema(
-  {
-    month: String,
-    revenue: Number,
-    expenses: Number,
-    income: Number, // Add income field
-    operationalExpenses: Number,
-    nonOperationalExpenses: Number,
-  },
-  { toJSON: { getters: true } }
-)
-
-const yearSchema = new Schema(
-  {
-    year: Number,
-    revenue: Number,
-    expenses: Number,
-    income: Number, // Add income field
-    operationalExpenses: Number,
-    nonOperationalExpenses: Number,
+    amount: Number,
+    isCredit: Boolean, // true for credit, false for debit
   },
   { toJSON: { getters: true } }
 )
 
 const KPISchema = new Schema(
   {
-    totalProfit: Number,
-    totalRevenue: Number,
-    totalExpenses: Number,
-    totalIncome: Number, // Add totalIncome field
-    expensesByCategory: {
-      type: Map,
-      of: Number,
-    },
-    dailyData: [daySchema],
-    monthlyData: [monthSchema],
-    yearlyData: [yearSchema],
+    dailyTransactions: [transactionSchema],
+    monthlyTransactions: [
+      {
+        month: String,
+        transactions: [transactionSchema],
+      },
+    ],
+    yearlyTransactions: [
+      {
+        year: Number,
+        transactions: [transactionSchema],
+      },
+    ],
   },
   { timestamps: true, toJSON: { getters: true } }
 )

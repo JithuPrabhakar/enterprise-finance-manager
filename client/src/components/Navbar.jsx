@@ -1,11 +1,12 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Box, useTheme, Typography, Button } from '@mui/material'
 import styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SavingsIcon from '@mui/icons-material/Savings'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useState } from 'react'
+import { logout } from '../slices/authSlice'
 
 const FlexBetween = styled(Box)({
   display: 'flex',
@@ -17,6 +18,17 @@ const Navbar = () => {
   const { palette } = useTheme()
   const [selected, setSelected] = useState('home')
   const isLoggedIn = useSelector((state) => state.auth.userInfo !== null)
+  const userInfo = useSelector((state) => state.auth.userInfo)
+  console.log(userInfo)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    dispatch(logout())
+
+    // Navigate to login page
+    navigate('/')
+  }
 
   return (
     <FlexBetween mb='0.25rem' p='0.5rem 0' color={palette.grey[300]}>
@@ -86,7 +98,10 @@ const Navbar = () => {
         )}
       </FlexBetween>
       <FlexBetween gap='1rem'>
-        <Link to='/login'>
+        <Link
+          to={isLoggedIn ? '#' : '/login'}
+          onClick={isLoggedIn ? handleLogout : null}
+        >
           {isLoggedIn ? (
             <>
               Log Out
@@ -101,8 +116,13 @@ const Navbar = () => {
         </Link>
         <Button
           variant='contained'
+          disabled={isLoggedIn}
           sx={{
             background: palette.primary.light,
+            borderColor: palette.primary.light,
+            '&.MuiButton-contained': {
+              color: isLoggedIn ? 'white' : 'black',
+            },
             '&:hover': { background: palette.primary[300] },
           }}
           component={Link}
