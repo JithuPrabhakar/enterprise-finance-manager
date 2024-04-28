@@ -3,15 +3,13 @@ import Transaction from '../models/transactionModel.js'
 
 const addTransaction = async (req, res) => {
   try {
-    // Extract data from request body
-    const { date, amount, buyer, productIds } = req.body
+    const { date, amount, description, type } = req.body
 
-    // Create a new transaction entry
     const newTransaction = await Transaction.create({
       date,
       amount,
-      buyer,
-      productIds,
+      description,
+      type,
     })
 
     res.status(201).json(newTransaction)

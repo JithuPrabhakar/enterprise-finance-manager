@@ -4,11 +4,10 @@ const Schema = mongoose.Schema
 
 const transactionSchema = new Schema(
   {
-    date: Date,
-    description: String,
-    amount: Number,
-    type: { type: String, enum: ['debit', 'credit'] },
-    department: { type: Schema.Types.ObjectId, ref: 'Department' },
+    date: { type: Date, required: true },
+    description: { type: String, required: true },
+    amount: { type: Number, required: true },
+    type: { type: String, enum: ['debit', 'credit'], required: true },
   },
   { timestamps: true }
 )

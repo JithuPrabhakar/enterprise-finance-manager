@@ -16,7 +16,7 @@ export const departmentApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    messages: builder.mutation({
+    messages: builder.query({
       query: () => ({
         url: '/api/dept/adminMsg',
       }),

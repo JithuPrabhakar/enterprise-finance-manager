@@ -8,6 +8,7 @@ import {
 } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react'
+import { useAddTransactionsMutation } from '../../slices/accountSlice'
 
 const darkTheme = createTheme({
   palette: {
@@ -25,11 +26,13 @@ const TransactionForm = () => {
   const { palette } = useTheme()
   const [transactionType, setTransactionType] = useState('debit')
 
+  const [addTransaction] = useAddTransactionsMutation()
+
   const handleTypeChange = (event) => {
     setTransactionType(event.target.value)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const expense = {
@@ -39,13 +42,17 @@ const TransactionForm = () => {
       type: transactionType,
     }
     console.log(expense)
-    // Add your submission logic here
+
+    event.currentTarget.reset()
+
+    const res = await addTransaction(expense).unwrap()
+    console.log(res)
   }
 
   return (
     <ThemeProvider theme={darkTheme}>
       <Typography variant='h4' sx={{ color: palette.primary.light, mt: 2 }}>
-        Add daily expenses
+        Add daily transactions
       </Typography>
       <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <TextField

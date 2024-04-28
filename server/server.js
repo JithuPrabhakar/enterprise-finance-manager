@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
 import departmentRoutes from './routes/departmentRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
 import { errorHandler, notFound } from './middleware/errorHandler.js'
 import kpiRoutes from './routes/kpiRoutes.js'
 
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', userRoutes)
 app.use('/api/kpi', kpiRoutes)
 app.use('/api/dept', departmentRoutes)
-// app.use('/api/kpi', kpiRoutes)
+app.use('/api/accounts', transactionRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
