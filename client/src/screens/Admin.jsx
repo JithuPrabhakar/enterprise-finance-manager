@@ -65,7 +65,7 @@ const Admin = () => {
           m: 2,
           backgroundColor: palette.primary.main,
         }}
-        disabled={showMsgAdminForm}
+        disabled={showAdminMsgs}
       >
         Show Department messages
       </Button>
