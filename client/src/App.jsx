@@ -9,11 +9,11 @@ import { useMemo } from 'react'
 import { themeSettings } from './theme.js'
 import Navbar from './components/Navbar.jsx'
 import { Box } from '@mui/material'
-import Dashboard from './screens/Dashboard/Dashboard.jsx'
 import Features from './screens/Features.jsx'
 import GetStarted from './screens/GetStarted.jsx'
 import Accountant from './screens/Accountant.jsx'
 import DeptHeadPage from './screens/DeptHeadPage.jsx'
+import Admin from './screens/Admin.jsx'
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), [])
@@ -27,7 +27,7 @@ function App() {
             <Route path='/' element={<HomeScreen />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard' element={<Admin />} />
             <Route path='/accountant' element={<Accountant />} />
             <Route path='/department' element={<DeptHeadPage />} />
             <Route path='/features' element={<Features />} />

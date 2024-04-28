@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useGetTransactionsQuery } from '../../slices/accountSlice'
+import Loader from '../../components/Loader'
 
 const ViewTransactions = () => {
   const { palette } = useTheme()
@@ -20,7 +21,7 @@ const ViewTransactions = () => {
     <div>
       <h2>Transactions</h2>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : (
         <TableContainer component={Paper}>
           <Table>

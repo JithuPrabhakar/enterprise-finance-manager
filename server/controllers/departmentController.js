@@ -48,6 +48,19 @@ const showAdminMessages = async (req, res) => {
   }
 }
 
+const approveAdminMessage = async (req, res) => {
+  try {
+    const id = req.params.id
+    const msg = await AdminMsg.findByIdAndUpdate(
+      { _id: id },
+      { approved: true }
+    )
+    res.status(201).json(msg)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 const getStudentFee = async (req, res) => {
   try {
     const msgs = await StudentFee.find()
@@ -57,4 +70,10 @@ const getStudentFee = async (req, res) => {
   }
 }
 
-export { createAdminMessage, addStudentFee, showAdminMessages, getStudentFee }
+export {
+  createAdminMessage,
+  addStudentFee,
+  showAdminMessages,
+  getStudentFee,
+  approveAdminMessage,
+}

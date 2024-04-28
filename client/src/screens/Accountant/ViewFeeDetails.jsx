@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useGetStudentFeeQuery } from '../../slices/accountSlice'
+import Loader from '../../components/Loader'
 
 const ViewFeeDetails = () => {
   const { palette } = useTheme()
@@ -19,7 +20,7 @@ const ViewFeeDetails = () => {
     <div>
       <h2>Student Fee Details</h2>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : (
         <TableContainer component={Paper}>
           <Table>

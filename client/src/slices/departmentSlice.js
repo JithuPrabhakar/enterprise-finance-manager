@@ -9,6 +9,7 @@ export const departmentApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
     repairs: builder.mutation({
       query: (data) => ({
         url: '/api/dept/adminMsg',
@@ -16,6 +17,14 @@ export const departmentApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    approveRepairs: builder.mutation({
+      query: (id) => ({
+        url: `/api/dept/adminMsg/${id}`,
+        method: 'PATCH',
+      }),
+    }),
+
     messages: builder.query({
       query: () => ({
         url: '/api/dept/adminMsg',
@@ -24,5 +33,9 @@ export const departmentApiSlice = apiSlice.injectEndpoints({
   }),
 })
 
-export const { useStudentFeeMutation, useRepairsMutation, useMessagesQuery } =
-  departmentApiSlice
+export const {
+  useStudentFeeMutation,
+  useRepairsMutation,
+  useMessagesQuery,
+  useApproveRepairsMutation,
+} = departmentApiSlice
