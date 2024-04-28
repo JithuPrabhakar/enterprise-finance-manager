@@ -48,4 +48,13 @@ const showAdminMessages = async (req, res) => {
   }
 }
 
-export { createAdminMessage, addStudentFee, showAdminMessages }
+const getStudentFee = async (req, res) => {
+  try {
+    const msgs = await StudentFee.find()
+    res.status(201).json(msgs)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+export { createAdminMessage, addStudentFee, showAdminMessages, getStudentFee }

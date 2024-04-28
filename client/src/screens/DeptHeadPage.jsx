@@ -3,18 +3,15 @@ import { useTheme, Typography, Box, Button } from '@mui/material'
 import StudentForm from './Department/StudentForm'
 import MsgAdmin from './Department/MsgAdmin'
 import { useSelector } from 'react-redux'
-import { useMessagesMutation } from '../slices/departmentSlice'
 import MsgTable from './Department/MsgTable'
 
 const DeptHeadPage = () => {
   const [showStudentForm, setShowStudentForm] = useState(false)
   const [showMsgAdminForm, setShowMsgAdminForm] = useState(false)
   const [showAdminMsgs, setShowAdminMsgs] = useState(false)
-  const [msgs, setMsgs] = useState([])
   const { palette } = useTheme()
 
   const userInfo = useSelector((state) => state.auth.userInfo)
-  const [messages] = useMessagesMutation()
 
   const handleShowStudentForm = () => {
     setShowStudentForm(true)
@@ -31,9 +28,7 @@ const DeptHeadPage = () => {
   const handleShowMsgs = async () => {
     setShowMsgAdminForm(false)
     setShowStudentForm(false)
-    messages()
-      .then((res) => setMsgs(res.data))
-      .then(setShowAdminMsgs(true))
+    setShowAdminMsgs(true)
   }
 
   return (
@@ -79,7 +74,7 @@ const DeptHeadPage = () => {
       </Button>
       {showStudentForm && <StudentForm department={userInfo.department} />}
       {showMsgAdminForm && <MsgAdmin department={userInfo.department} />}
-      {showAdminMsgs && <MsgTable messages={msgs} />}
+      {showAdminMsgs && <MsgTable />}
     </Box>
   )
 }

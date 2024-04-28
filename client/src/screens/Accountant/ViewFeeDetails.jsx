@@ -9,15 +9,15 @@ import {
   useTheme,
   Typography,
 } from '@mui/material'
-import { useMessagesQuery } from '../../slices/departmentSlice'
+import { useGetStudentFeeQuery } from '../../slices/accountSlice'
 
-const MsgTable = () => {
+const ViewFeeDetails = () => {
   const { palette } = useTheme()
-  const { data, isLoading, error } = useMessagesQuery()
+  const { data, isLoading, error } = useGetStudentFeeQuery()
 
   return (
     <div>
-      <h2>Admin messages</h2>
+      <h2>Student Fee Details</h2>
       {isLoading ? (
         <h2>Loading...</h2>
       ) : (
@@ -26,30 +26,26 @@ const MsgTable = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Typography variant='h4'>Item</Typography>
+                  <Typography variant='h4'>Date</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Type</Typography>
+                  <Typography variant='h4'>Department</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Message</Typography>
+                  <Typography variant='h4'>Register Number</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Estimate</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant='h4'>Approved</Typography>
+                  <Typography variant='h4'>Amount</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((message) => (
                 <TableRow key={message._id}>
-                  <TableCell>{message.item}</TableCell>
-                  <TableCell>{message.type}</TableCell>
-                  <TableCell>{message.message}</TableCell>
-                  <TableCell>{message.estimate}</TableCell>
-                  <TableCell>{message.approved ? 'Yes' : 'No'}</TableCell>
+                  <TableCell>{message.date.toString().split('T')[0]}</TableCell>
+                  <TableCell>{message.department}</TableCell>
+                  <TableCell>{message.regNo}</TableCell>
+                  <TableCell>{message.fees}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -60,4 +56,4 @@ const MsgTable = () => {
   )
 }
 
-export default MsgTable
+export default ViewFeeDetails

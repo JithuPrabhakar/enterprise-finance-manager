@@ -24,8 +24,5 @@ export const departmentApiSlice = apiSlice.injectEndpoints({
   }),
 })
 
-export const {
-  useStudentFeeMutation,
-  useRepairsMutation,
-  useMessagesMutation,
-} = departmentApiSlice
+export const { useStudentFeeMutation, useRepairsMutation, useMessagesQuery } =
+  departmentApiSlice

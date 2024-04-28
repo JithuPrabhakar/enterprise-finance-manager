@@ -18,4 +18,14 @@ const addTransaction = async (req, res) => {
   }
 }
 
-export { addTransaction }
+const getTransaction = async (req, res) => {
+  try {
+    const transactions = await Transaction.find()
+
+    res.status(201).json(transactions)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+export { addTransaction, getTransaction }

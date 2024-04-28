@@ -15,8 +15,17 @@ export const accountApiSlice = apiSlice.injectEndpoints({
         url: '/api/accounts/transaction',
       }),
     }),
+
+    getStudentFee: builder.query({
+      query: () => ({
+        url: '/api/dept/studentFee',
+      }),
+    }),
   }),
 })
 
-export const { useAddTransactionsMutation, useGetTransactionsQuery } =
-  accountApiSlice
+export const {
+  useAddTransactionsMutation,
+  useGetTransactionsQuery,
+  useGetStudentFeeQuery,
+} = accountApiSlice
