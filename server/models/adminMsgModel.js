@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 
 const adminMessageSchema = new Schema(
   {
-    item: String,
-    type: String,
-    message: String,
-    estimate: Number,
-    department: { type: Schema.Types.ObjectId, ref: 'Department' },
+    item: { type: String, required: true },
+    type: { type: String, required: true },
+    message: { type: String, required: true },
+    estimate: { type: Number, required: true },
+    department: { type: String, required: true },
     approved: { type: Boolean, default: false },
   },
   { timestamps: true }

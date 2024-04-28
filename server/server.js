@@ -3,14 +3,9 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
+import departmentRoutes from './routes/departmentRoutes.js'
 import { errorHandler, notFound } from './middleware/errorHandler.js'
 import kpiRoutes from './routes/kpiRoutes.js'
-// import productRoutes from './routes/product.js'
-// import transactionRoutes from './routes/transaction.js'
-// import KPI from './models/kpiModel.js'
-// import Product from './models/Product.js'
-// import Transaction from './models/Transaction.js'
-// import { kpis, products, transactions } from './data/data.js'
 
 dotenv.config()
 
@@ -32,6 +27,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRoutes)
 app.use('/api/kpi', kpiRoutes)
+app.use('/api/dept', departmentRoutes)
+// app.use('/api/kpi', kpiRoutes)
 
 app.use(notFound)
 app.use(errorHandler)

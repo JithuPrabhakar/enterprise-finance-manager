@@ -1,6 +1,14 @@
-import { useTheme, Box, Grid, TextField, Button } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import {
+  useTheme,
+  Box,
+  Grid,
+  TextField,
+  Button,
+  Typography,
+} from '@mui/material'
+// import { useDispatch } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useStudentFeeMutation } from '../../slices/departmentSlice'
 
 const darkTheme = createTheme({
   palette: {
@@ -14,9 +22,11 @@ const darkTheme = createTheme({
   },
 })
 
-const StudentForm = () => {
+const StudentForm = ({ department }) => {
   const { palette } = useTheme()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+
+  const [studentFee] = useStudentFeeMutation()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -27,19 +37,25 @@ const StudentForm = () => {
       graduation: data.get('graduation'),
       semester: data.get('semester'),
       fees: data.get('fees'),
-      date: new Date(data.get('date')), // Convert date string to Date object
+      date: new Date(data.get('date')),
+      department: department,
     }
     console.log(student)
 
     event.currentTarget.reset()
 
-    // Assuming `register` and `setCredentials` are defined elsewhere
+    const res = await studentFee(student).unwrap()
+    console.log(res)
+
     // const res = await register(student).unwrap()
     // dispatch(setCredentials({ ...res }))
   }
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <Typography variant='h6' sx={{ color: palette.primary.light, mt: 2 }}>
+        Student Fees Details
+      </Typography>
       <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

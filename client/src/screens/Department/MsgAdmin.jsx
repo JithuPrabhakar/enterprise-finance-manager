@@ -1,6 +1,14 @@
-import { useTheme, Box, Grid, TextField, Button } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import {
+  useTheme,
+  Box,
+  Grid,
+  TextField,
+  Button,
+  Typography,
+} from '@mui/material'
+// import { useDispatch } from 'react-redux'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useRepairsMutation } from '../../slices/departmentSlice'
 
 const darkTheme = createTheme({
   palette: {
@@ -14,9 +22,11 @@ const darkTheme = createTheme({
   },
 })
 
-const MsgAdmin = () => {
+const MsgAdmin = ({ department }) => {
   const { palette } = useTheme()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+
+  const [repairs] = useRepairsMutation()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -26,10 +36,15 @@ const MsgAdmin = () => {
       type: data.get('type'),
       message: data.get('message'),
       estimate: data.get('estimate'),
+      approved: false,
+      department: department,
     }
     console.log(message)
 
     event.currentTarget.reset()
+
+    const res = await repairs(message).unwrap()
+    console.log(res)
 
     // Assuming `register` and `setCredentials` are defined elsewhere
     // const res = await register(message).unwrap()
@@ -38,6 +53,9 @@ const MsgAdmin = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <Typography variant='h6' sx={{ color: palette.primary.light, mt: 2 }}>
+        Message to Admin for repairs or new items
+      </Typography>
       <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

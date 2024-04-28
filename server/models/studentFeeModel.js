@@ -4,13 +4,13 @@ const Schema = mongoose.Schema
 
 const studentFeeSchema = new Schema(
   {
-    name: String,
-    regNo: String,
-    graduation: String,
-    semester: String,
-    fees: Number,
-    date: Date,
-    department: { type: Schema.Types.ObjectId, ref: 'Department' },
+    name: { type: String, required: true },
+    regNo: { type: String, required: true },
+    graduation: { type: String, required: true },
+    semester: { type: String, required: true },
+    fees: { type: Number, required: true },
+    date: { type: Date, required: true },
+    department: { type: String, required: true },
   },
   { timestamps: true }
 )

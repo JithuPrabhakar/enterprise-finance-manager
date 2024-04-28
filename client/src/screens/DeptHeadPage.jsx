@@ -2,30 +2,44 @@ import { useState } from 'react'
 import { useTheme, Typography, Box, Button } from '@mui/material'
 import StudentForm from './Department/StudentForm'
 import MsgAdmin from './Department/MsgAdmin'
+import { useSelector } from 'react-redux'
+import { useMessagesMutation } from '../slices/departmentSlice'
+import MsgTable from './Department/MsgTable'
 
 const DeptHeadPage = () => {
-  const [departmentName, setDepartmentName] = useState('Computer')
   const [showStudentForm, setShowStudentForm] = useState(false)
   const [showMsgAdminForm, setShowMsgAdminForm] = useState(false)
+  const [showAdminMsgs, setShowAdminMsgs] = useState(false)
+  const [msgs, setMsgs] = useState([])
   const { palette } = useTheme()
+
+  const userInfo = useSelector((state) => state.auth.userInfo)
+  const [messages] = useMessagesMutation()
 
   const handleShowStudentForm = () => {
     setShowStudentForm(true)
     setShowMsgAdminForm(false)
+    setShowAdminMsgs(false)
   }
 
   const handleShowMsgAdminForm = () => {
     setShowStudentForm(false)
     setShowMsgAdminForm(true)
+    setShowAdminMsgs(false)
+  }
+
+  const handleShowMsgs = async () => {
+    setShowMsgAdminForm(false)
+    setShowStudentForm(false)
+    messages()
+      .then((res) => setMsgs(res.data))
+      .then(setShowAdminMsgs(true))
   }
 
   return (
     <Box sx={{ mt: 4, textAlign: 'center' }}>
       <Typography variant='h1' sx={{ color: palette.primary.light }}>
-        Welcome to the {departmentName} department
-      </Typography>
-      <Typography variant='h3' sx={{ color: palette.primary.light, mt: 2 }}>
-        Student Fees Details
+        Welcome to the {userInfo.department} department
       </Typography>
       <Button
         onClick={handleShowStudentForm}
@@ -51,8 +65,21 @@ const DeptHeadPage = () => {
       >
         Ask for repairs to admin
       </Button>
-      {showStudentForm && <StudentForm />}
-      {showMsgAdminForm && <MsgAdmin />}
+      <Button
+        onClick={handleShowMsgs}
+        size='large'
+        variant='contained'
+        sx={{
+          m: 2,
+          backgroundColor: palette.primary.main,
+        }}
+        disabled={showMsgAdminForm}
+      >
+        Show Admin messages
+      </Button>
+      {showStudentForm && <StudentForm department={userInfo.department} />}
+      {showMsgAdminForm && <MsgAdmin department={userInfo.department} />}
+      {showAdminMsgs && <MsgTable messages={msgs} />}
     </Box>
   )
 }
