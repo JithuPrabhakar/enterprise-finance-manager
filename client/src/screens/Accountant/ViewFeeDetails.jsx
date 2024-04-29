@@ -11,14 +11,29 @@ import {
 } from '@mui/material'
 import { useGetStudentFeeQuery } from '../../slices/accountSlice'
 import Loader from '../../components/Loader'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      light: '#64b5f6',
+      main: '#2196f3',
+      dark: '#1976d2',
+      contrastText: '#fff',
+    },
+  },
+})
 
 const ViewFeeDetails = () => {
   const { palette } = useTheme()
   const { data, isLoading, error } = useGetStudentFeeQuery()
 
   return (
-    <div>
-      <h2>Student Fee Details</h2>
+    <ThemeProvider theme={darkTheme}>
+      <Typography variant='h6' sx={{ color: palette.primary.light, mt: 2 }}>
+        Student Fee Details
+      </Typography>
       {isLoading ? (
         <Loader />
       ) : (
@@ -27,16 +42,24 @@ const ViewFeeDetails = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Typography variant='h4'>Date</Typography>
+                  <Typography color={palette.secondary.light} variant='p'>
+                    Date
+                  </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Department</Typography>
+                  <Typography color={palette.secondary.light} variant='p'>
+                    Department
+                  </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Register Number</Typography>
+                  <Typography color={palette.secondary.light} variant='p'>
+                    Register Number
+                  </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography variant='h4'>Amount</Typography>
+                  <Typography color={palette.secondary.light} variant='p'>
+                    Amount
+                  </Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -53,7 +76,7 @@ const ViewFeeDetails = () => {
           </Table>
         </TableContainer>
       )}
-    </div>
+    </ThemeProvider>
   )
 }
 

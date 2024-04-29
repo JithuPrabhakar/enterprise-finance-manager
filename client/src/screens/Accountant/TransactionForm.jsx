@@ -51,8 +51,8 @@ const TransactionForm = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Typography variant='h4' sx={{ color: palette.primary.light, mt: 2 }}>
-        Add daily transactions
+      <Typography variant='h6' sx={{ color: palette.primary.light, mt: 2 }}>
+        Add transactions
       </Typography>
       <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <TextField
